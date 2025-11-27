@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login – TaskFlow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gradient-bg">
+  <div class="center-wrapper">
+    <div class="card auth-card">
+      <h1 class="app-heading">TaskFlow <span class="emoji">✅</span></h1>
+      <p class="subtitle">Login with your email and password to access your tasks.</p>
+
+      <form id="login-form" class="form">
+        <label class="field-label" for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          class="input"
+          placeholder="yourname@example.com"
+          autocomplete="off"
+          required
+        />
+
+        <label class="field-label" for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="input"
+          placeholder="Enter password"
+          autocomplete="off"
+          required
+        />
+
+        <button type="submit" class="btn btn-primary full-width">
+          Login
+        </button>
+
+        <button type="button" id="forgot-password" class="link-button">
+          Forgot password?
+        </button>
+      </form>
+
+      <p class="small-text muted">
+        Demo app: your email & password are saved only in this browser using localStorage.
+      </p>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

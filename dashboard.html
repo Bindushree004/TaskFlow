@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard – TaskFlow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gradient-bg">
+  <div class="page">
+    <!-- Top bar -->
+    <header class="top-bar">
+      <div class="logo-group">
+        <span class="logo-mark">TF</span>
+        <span class="logo-text">TaskFlow</span>
+      </div>
+      <div class="top-right">
+        <div class="user-info">
+          <span class="welcome">Hi, <span id="user-name">User</span> 👋</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="layout">
+      <!-- Left column: create + tasks -->
+      <section class="column">
+        <div class="card">
+          <h2 class="card-title">Add New Task</h2>
+          <p class="subtitle">Add details like due date, time, priority and category.</p>
+
+          <form id="task-form" class="form">
+            <label class="field-label" for="task-input">Task title</label>
+            <input
+              type="text"
+              id="task-input"
+              class="input"
+              placeholder="e.g., Complete DBMS assignment"
+              autocomplete="off"
+            />
+
+            <div class="form-row">
+              <div class="form-field">
+                <label class="field-label" for="task-due">Due date</label>
+                <input type="date" id="task-due" class="input" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="task-time">Due time</label>
+                <input type="time" id="task-time" class="input" />
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="task-priority">Priority</label>
+                <select id="task-priority" class="input">
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                  <option value="low">Low</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label class="field-label" for="task-category">Category</label>
+                <select id="task-category" class="input">
+                  <option value="Study" selected>Study</option>
+                  <option value="Work">Work</option>
+                  <option value="Personal">Personal</option>
+                  <option value="Health">Health</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary full-width">Add Task</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Your Tasks</h2>
+              <p class="subtitle small-subtitle">
+                Search, filter, and manage today’s work.
+              </p>
+            </div>
+            <div class="filters">
+              <button class="filter-chip active" data-filter="all">All</button>
+              <button class="filter-chip" data-filter="active">Active</button>
+              <button class="filter-chip" data-filter="completed">Done</button>
+            </div>
+          </div>
+
+          <input
+            type="text"
+            id="search-input"
+            class="input search-input"
+            placeholder="Search by text or category..."
+            autocomplete="off"
+          />
+
+          <ul id="task-list" class="task-list"></ul>
+
+          <div class="task-footer-row">
+            <button id="clear-completed" class="btn btn-secondary small">
+              Clear done
+            </button>
+            <button id="delete-all" class="btn btn-danger-text small">
+              Delete all
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column: profile + stats + weekly + logout -->
+      <section class="column column-narrow">
+        <!-- Profile card -->
+        <div class="card">
+          <h2 class="card-title">Profile</h2>
+          <div class="profile-row">
+            <div class="form">
+              <label class="field-label" for="profile-name">Display name</label>
+              <input id="profile-name" class="input" type="text" />
+
+              <p class="small-text">
+                Email:
+                <span id="profile-email" class="muted"></span>
+              </p>
+
+              <button id="save-profile" class="btn btn-secondary small">
+                Save profile
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats card -->
+        <div class="card">
+          <h2 class="card-title">Progress Overview</h2>
+          <p class="subtitle" id="mood-text">
+            Start by adding a few tasks for today ✨
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-label">Total tasks</span>
+              <span class="stat-value" id="stat-total">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Completed</span>
+              <span class="stat-value" id="stat-completed">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Remaining</span>
+              <span class="stat-value" id="stat-remaining">0</span>
+            </div>
+          </div>
+
+          <div class="progress-wrapper">
+            <div class="progress-label-row">
+              <span class="progress-label">Completion</span>
+              <span class="progress-percent" id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <p class="small-text muted">
+            Tip: Mark tasks as done regularly to see your progress grow 📈
+          </p>
+        </div>
+
+        <!-- Weekly progress & pie chart -->
+        <div class="card">
+          <h2 class="card-title">Weekly Progress</h2>
+          <p class="subtitle">
+            Tasks completed in the last 7 days.
+          </p>
+
+          <div id="week-bars" class="week-bars"></div>
+
+          <div class="pie-row">
+            <div class="pie-container">
+              <div id="pie-chart" class="pie-chart"></div>
+              <p class="small-text muted pie-caption">
+                Completed vs remaining
+              </p>
+            </div>
+            <ul class="legend">
+              <li>
+                <span class="legend-swatch done"></span> Done
+              </li>
+              <li>
+                <span class="legend-swatch remaining"></span> Remaining
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Logout card at bottom -->
+        <div class="card logout-card">
+          <button id="logout-btn" class="btn btn-secondary full-width">
+            Logout
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Reminder sound (add reminder.mp3 file in your project folder) -->
+  <audio id="reminder-audio" src="reminder.mp3" preload="auto"></audio>
+
+  <!-- Toast notifications container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
