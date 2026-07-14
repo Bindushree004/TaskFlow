@@ -76,6 +76,6 @@ git clone https://github.com/YourUsername/TaskFlow.git
 
 ## 👩‍💻 Author
 
-**Bindu Sudhakar**
+**Bindushree GS**
 
 GitHub: https://github.com/Bindushree004
